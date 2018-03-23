@@ -42,7 +42,6 @@ public class Controller {
 
     @FXML
     private Button btnMainMenu;
-    private Category category;
 
     @FXML
     void initialize() {
@@ -102,7 +101,6 @@ public class Controller {
     }
 
     private List<Item> selectByCategory(Category category) {
-        this.category = category;
         List<Item> selectItem = new ArrayList<>();
         items.forEach(item -> {
             if (item.getCategory() == category) {
