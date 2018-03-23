@@ -27,5 +27,23 @@
             <Font size="27.0" />
          </font>
       </Label>
+      <Label fx:id="lblItemName" layoutX="96.0" layoutY="86.0" prefHeight="25.0" prefWidth="223.0" text="Label" visible="false">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnNext" layoutX="281.0" layoutY="251.0" mnemonicParsing="false" text="Наступний товар" visible="false" />
+      <Label fx:id="lblItemQuantity" layoutX="97.0" layoutY="137.0" prefHeight="25.0" prefWidth="223.0" text="Label" visible="false">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblItemPrice" layoutX="96.0" layoutY="188.0" prefHeight="25.0" prefWidth="223.0" text="Label" visible="false">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnPrev" layoutX="123.0" layoutY="251.0" mnemonicParsing="false" text="Попередній товар" visible="false" />
+      <Button fx:id="btnMainMenu" layoutX="240.0" layoutY="337.0" mnemonicParsing="false" text="Головне меню" visible="false" />
    </children>
 </AnchorPane>

@@ -13,6 +13,9 @@ public class Controller {
 
     private List<Item> items = new ArrayList<>();
 
+    private int i = 0;
+    private int k = 0;
+
     @FXML
     private Button btnFruits;
 
@@ -21,6 +24,25 @@ public class Controller {
 
     @FXML
     private Label lblSelectCategory;
+
+    @FXML
+    private Label lblItemQuantity;
+
+    @FXML
+    private Button btnNext;
+
+    @FXML
+    private Button btnPrev;
+
+    @FXML
+    private Label lblItemPrice;
+
+    @FXML
+    private Label lblItemName;
+
+    @FXML
+    private Button btnMainMenu;
+    private Category category;
 
     @FXML
     void initialize() {
@@ -35,26 +57,93 @@ public class Controller {
 
 
         btnFruits.setOnAction(event -> {
-            btnFruits.setVisible(false);
-            btnVegetables.setVisible(false);
-            lblSelectCategory.setVisible(false);
+            i = 0;
+            hideMainMenu();
+            List<Item> fruits = selectByCategory(Category.FRUITS);
+            fillLabels(fruits, i);
+            btnNext.setOnAction(event1 -> {
+                if (i < fruits.size() - 1) {
+                    i++;
+                    fillLabels(fruits, i);
+                }
+            });
+            btnPrev.setOnAction(event1 -> {
+                if (i > 0) {
+                    i--;
+                    fillLabels(fruits, i);
+                }
+            });
+
         });
 
         btnVegetables.setOnAction(event -> {
-            btnFruits.setVisible(false);
-            btnVegetables.setVisible(false);
-            lblSelectCategory.setVisible(false);
+            k = 0;
+            hideMainMenu();
+            List<Item> vegetables = selectByCategory(Category.VEGETABLES);
+            fillLabels(vegetables, k);
+            btnNext.setOnAction(event1 -> {
+                if (k < vegetables.size() - 1) {
+                    k++;
+                    fillLabels(vegetables, k);
+                }
+            });
+            btnPrev.setOnAction(event1 -> {
+                if (k > 0) {
+                    k--;
+                    fillLabels(vegetables, k);
+                }
+            });
         });
+        btnMainMenu.setOnAction(event1 -> {
+            showMainMenu();
+        });
+
 
     }
 
-    private List<Item> selectByCategory(Category category){
-        List<Item> selectedItems = new ArrayList<>();
+    private List<Item> selectByCategory(Category category) {
+        this.category = category;
+        List<Item> selectItem = new ArrayList<>();
         items.forEach(item -> {
-            if (category == item.getCategory()){
-                selectedItems.add(item);
+            if (item.getCategory() == category) {
+                selectItem.add(item);
             }
         });
-        return selectedItems;
+        return selectItem;
+    }
+
+    private void hideMainMenu() {
+        btnFruits.setVisible(false);
+        btnVegetables.setVisible(false);
+        lblSelectCategory.setVisible(false);
+
+        btnMainMenu.setVisible(true);
+        btnPrev.setVisible(true);
+        lblItemName.setVisible(true);
+        lblItemQuantity.setVisible(true);
+        lblItemPrice.setVisible(true);
+        btnNext.setVisible(true);
+
+    }
+    private void showMainMenu() {
+        btnFruits.setVisible(true);
+        btnVegetables.setVisible(true);
+        lblSelectCategory.setVisible(true);
+
+
+        btnMainMenu.setVisible(false);
+        btnPrev.setVisible(false);
+        lblItemName.setVisible(false);
+        lblItemQuantity.setVisible(false);
+        lblItemPrice.setVisible(false);
+        btnNext.setVisible(false);
+
+    }
+
+
+    private void fillLabels(List<Item> items, int currentPosition) {
+        lblItemName.setText(items.get(currentPosition).getName());
+        lblItemQuantity.setText(String.valueOf(items.get(currentPosition).getQuantity()) + " шт");
+        lblItemPrice.setText(String.valueOf(items.get(currentPosition).getPrice()) + " грн");
     }
 }
